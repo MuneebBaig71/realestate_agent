@@ -193,12 +193,6 @@ This project is open source and available under the [MIT License](LICENSE).
 
 - **MuneebBaig71** - [GitHub Profile](https://github.com/MuneebBaig71)
 
-## 🙏 Acknowledgments
-
-- OpenAI for GPT-4.1 model
-- AIML API for model access
-- Property platforms: Rightmove, Zoopla, SpareRoom
-- React community for UI components and animations
 
 ## 📧 Contact
 
