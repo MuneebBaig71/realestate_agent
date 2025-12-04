@@ -1,201 +1,209 @@
-# Real Estate Agent
+# 🏠 AI-Powered Real Estate Agent Chatbot
 
-A Python-based AI-powered real estate assistant that helps users find properties, compose emails, and get location information. The system uses multiple specialized agents to handle different types of queries and provides a FastAPI web interface.
+An intelligent chatbot application that helps users search for properties across UK platforms (Rightmove, Zoopla, SpareRoom), get location information, and generate professional inquiry emails using AI-powered agents.
 
-## 🏠 Features
+## ✨ Features
 
-- **Multi-Agent System**: Specialized agents for different types of queries:
-  - **Real Estate Agent**: General property search and information
-  - **Email Agent**: Composes professional emails to landlords/agents
-  - **Location Agent**: Provides distance and location-based information
-  - **Room Agent**: Specialized for room searches on UK platforms
-  - **Flat Agent**: Specialized for flat/apartment searches
+- **🔍 Property Search**: Real-time property listings from Rightmove, Zoopla, and SpareRoom
+- **📍 Location Intelligence**: Distance calculations, coordinates, and neighborhood information
+- **✉️ Email Writer**: AI-generated professional inquiry emails for landlords and agents
+- **💬 General Chat**: Multi-purpose real estate assistance
+- **🧠 Conversation Memory**: Session-based context retention across conversations
+- **🎨 Modern UI**: Animated gradient interface with intuitive chat design
 
-- **Web Scraping**: Polite Zoopla scraper using Playwright for real-time property data
-- **Session Management**: SQLite-based session storage for conversation memory
-- **FastAPI Integration**: RESTful API for easy integration
-- **AI-Powered**: Uses OpenAI GPT models via AIML API
+## 🏗️ Architecture
 
-## 🚀 Quick Start
+### Multi-Agent System
+
+- **General Chat Agent**: Orchestrates general real estate inquiries
+- **Property Search Agent**: Specialized in finding rooms, flats, and studios
+- **Location Agent**: Handles geographic queries and distance calculations
+- **Email Agent**: Generates professional correspondence
+
+### Tech Stack
+
+- **Frontend**: React 18.2.0 with CSS3 animations
+- **Backend**: FastAPI with Python
+- **AI Model**: GPT-4.1 (via AIML API)
+- **Database**: SQLite for session persistence
+- **Tools**: Web search integration for live property data
+
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- Python 3.12+
-- OpenAI API key
+- Python 3.10+
+- Node.js 16+
+- OpenAI API key (AIML API compatible)
 
 ### Installation
 
-1. Clone the repository:
+1. **Clone the repository**
+
 ```bash
 git clone https://github.com/MuneebBaig71/realestate_agent.git
 cd realestate_agent
 ```
 
-2. Install dependencies using uv (recommended):
+2. **Set up environment variables**
+   Create a `.env` file in the root directory:
+
+```env
+OPENAI_API_KEY=your_api_key_here
+```
+
+3. **Install Python dependencies**
+
 ```bash
+pip install -r requirements.txt
+# or if using uv
 uv sync
 ```
 
-3. Set up environment variables:
+4. **Install frontend dependencies**
+
 ```bash
-cp .env.example .env
-# Add your OPENAI_API_KEY to the .env file
+cd frontend
+npm install
 ```
 
 ### Running the Application
 
-Start the FastAPI server:
+1. **Start the Backend**
+
 ```bash
-uvicorn realestate_agent.api:app --reload
+# From the root directory
+uvicorn src.realestate_agent.api:app --reload
 ```
 
 The API will be available at `http://localhost:8000`
 
-## 📡 API Usage
-
-### Endpoint: `/realestate-agent`
-
-Send a POST request with the following structure:
-
-```json
-{
-  "query": {
-    "prompt": "Find me a 2-bedroom flat in London under £2000"
-  },
-  "session_input": {
-    "session_id": "unique_session_id"
-  }
-}
-```
-
-### Example Queries
-
-- **Property Search**: "Find me a room in Reading under £800"
-- **Email Composition**: "Write an email to inquire about the property"
-- **Location Information**: "How far is this property from the city center?"
-
-## 🏗️ Architecture
-
-### Agent System
-
-The application uses a multi-agent architecture where different agents handle specific types of queries:
-
-```python
-# Query routing logic
-if is_email_query(prompt):
-    result = await Runner.run(email_agent, input=prompt, session=session)
-elif is_location_query(prompt):
-    result = await Runner.run(location_agent, input=prompt, session=session)
-else:
-    result = await Runner.run(agent, input=prompt, session=session)
-```
-
-### Components
-
-- **`api.py`**: FastAPI application with session management
-- **`main.py`**: Agent definitions and query routing logic
-- **`scraper.py`**: Zoopla web scraper using Playwright
-- **`__init__.py`**: Package initialization
-
-### Data Models
-
-```python
-class Query_Output(BaseModel):
-    price: str
-    location: str
-    postcode: str
-    link: str
-    property_type: str
-```
-
-## 🔧 Configuration
-
-### Environment Variables
+2. **Start the Frontend**
 
 ```bash
-OPENAI_API_KEY=your_api_key_here
+# In a new terminal
+cd frontend
+npm start
 ```
 
-### Scraper Configuration
+The React app will open at `http://localhost:3000`
 
-The Zoopla scraper includes:
-- Polite scraping with throttling
-- User-agent rotation
-- CAPTCHA detection
-- Error handling
-- Optional screenshots
+## 💡 Usage
 
-## 🛠️ Development
+### Property Search
 
-### Project Structure
+```
+"Find a 2-bedroom flat in London under £1500"
+"Show me rooms near Manchester University"
+"Search for studios in Birmingham with parking"
+```
+
+### Location Queries
+
+```
+"How far is Reading from London?"
+"What's the postcode for Oxford city center?"
+"Distance from Royal Berkshire Hospital to Reading"
+```
+
+### Email Generation
+
+```
+"Write an email to inquire about the flat on Rightmove"
+"Draft a message asking about viewing availability"
+"Compose an email to the landlord about the room"
+```
+
+## 📁 Project Structure
 
 ```
 realestate_agent/
 ├── src/
 │   └── realestate_agent/
-│       ├── __init__.py
-│       ├── api.py          # FastAPI application
-│       ├── main.py         # Agent definitions
-│       └── scraper.py      # Web scraping logic
-├── pyproject.toml          # Project configuration
-├── uv.lock                # Dependency lock file
+│       ├── main.py          # Agent definitions and CLI
+│       ├── api.py           # FastAPI endpoints
+│       └── scraper.py       # Web scraping utilities
+├── frontend/
+│   ├── src/
+│   │   ├── App.js           # Main React component
+│   │   ├── App.css          # Styling with animations
+│   │   └── index.js         # Entry point
+│   └── package.json
+├── pyproject.toml           # Python dependencies
+├── .env                     # Environment variables
 └── README.md
 ```
 
-### Dependencies
+## 🎯 Use Cases
 
-- **FastAPI**: Web framework
-- **OpenAI Agents**: AI agent framework
-- **Playwright**: Web scraping
-- **Mem0**: Memory management
-- **Pydantic**: Data validation
+1. **Students**: Finding affordable accommodation near universities
+2. **Professionals**: Quick property search during relocation
+3. **Families**: Searching for family-sized properties in specific areas
+4. **Property Seekers**: 24/7 intelligent real estate assistance
+5. **Real Estate Agents**: Automating initial client inquiries
 
-## 📝 Usage Examples
+## 🔮 Future Enhancements
 
-### Property Search
-```bash
-curl -X POST "http://localhost:8000/realestate-agent" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "query": {"prompt": "Find a studio apartment in Manchester under £1200"},
-    "session_input": {"session_id": "user123"}
-  }'
+- **Playwright MCP Integration**: Full browser automation for form filling and booking requests
+- **Property Comparison Dashboard**: Side-by-side analysis with interactive charts
+- **Price Alerts**: Track and notify on price drops for saved properties
+- **Tenant Review System**: Community ratings for landlords and properties
+- **Smart Commute Calculator**: Travel time analysis to work/university
+- **Voice Interface**: Speech-to-text property search
+- **Mobile App**: Native iOS and Android applications
+
+## 🛠️ API Endpoints
+
+### `/realestate-agent` (POST)
+
+Search for properties and get AI assistance
+
+**Request Body:**
+
+```json
+{
+  "query": "Find a flat in London",
+  "session_id": "user123"
+}
 ```
 
-### Email Composition
-```bash
-curl -X POST "http://localhost:8000/realestate-agent" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "query": {"prompt": "Write an email to inquire about viewing the property"},
-    "session_input": {"session_id": "user123"}
-  }'
+**Response:**
+
+```json
+{
+  "response": "AI-generated response with property listings"
+}
 ```
-
-## ⚠️ Important Notes
-
-- **Respect Terms of Service**: The scraper is designed for demo/prototyping purposes
-- **Rate Limiting**: Built-in throttling to be respectful to scraped websites
-- **Session Management**: Each user gets their own SQLite session for conversation memory
 
 ## 🤝 Contributing
 
+Contributions are welcome! Please feel free to submit a Pull Request.
+
 1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## 📄 License
+## 📝 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is open source and available under the [MIT License](LICENSE).
 
-## 👤 Author
+## 👥 Authors
 
-**Muneeb Baig**
-- Email: muneebbaig71@gmail.com
-- GitHub: [@MuneebBaig71](https://github.com/MuneebBaig71)
+- **MuneebBaig71** - [GitHub Profile](https://github.com/MuneebBaig71)
 
-## 🔗 Links
+## 🙏 Acknowledgments
 
-- [Repository](https://github.com/MuneebBaig71/realestate_agent)
-- [Issues](https://github.com/MuneebBaig71/realestate_agent/issues)
+- OpenAI for GPT-4.1 model
+- AIML API for model access
+- Property platforms: Rightmove, Zoopla, SpareRoom
+- React community for UI components and animations
+
+## 📧 Contact
+
+For questions or support, please open an issue on GitHub.
+
+---
+
+**Built with ❤️ for the Real Estate Community**
