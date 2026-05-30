@@ -100,7 +100,7 @@ def find_properties(
         max_results: Number of listings to return (default 10)
         near: OPTIONAL reference point (e.g. "Royal Berkshire Hospital", "Reading Station"). If provided, each listing gets walking + driving distance automatically appended.
     """
-    print(f"[agent] Multi-portal search: {location} ({property_type})")
+    print(f"[agent] find_properties called with: location={location!r}, property_type={property_type!r}, beds_min={beds_min}, price_max={price_max}, near={near!r}")
     listings = _scrape_all(
         location=location,
         property_type=property_type,
