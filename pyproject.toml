@@ -1,0 +1,27 @@
+[project]
+name = "realestate-agent"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Muneeb", email = "muneebbaig71@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "brightdata-sdk>=2.3.1",
+    "fastapi[standard]>=0.116.1",
+    "mem0ai>=0.1.116",
+    "openai-agents>=0.2.8",
+    "playwright>=1.54.0",
+    "sql>=2022.4.0",
+    "uvicorn>=0.35.0",
+    "beautifulsoup4>=4.12.2",
+    "speechmatics-python>=5.0.0.post1",
+]
+
+[project.scripts]
+realestate-agent = "realestate_agent:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
