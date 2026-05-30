@@ -66,7 +66,7 @@ function App() {
   // Get current messages for active menu
   const messages = menuChats[activeMenu];
 
-  const API_URL = "http://127.0.0.1:8000/realestate-agent";
+  const API_URL = "https://realestate-agent-1r07.onrender.com/realestate-agent";
 
   // Format message text with markdown and links
   const formatMessage = (text) => {
@@ -383,7 +383,7 @@ function App() {
       query: { prompt },
       session_input: { session_id: sessionId },
     };
-    const response = await fetch("http://127.0.0.1:8000/property-stream", {
+    const response = await fetch("https://realestate-agent-1r07.onrender.com/property-stream", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
@@ -419,7 +419,7 @@ function App() {
     setLivePartial("");
     try {
       // 1. Get temporary JWT from backend
-      const jwtResp = await fetch("http://127.0.0.1:8000/speechmatics-jwt", { method: "POST" });
+      const jwtResp = await fetch("https://realestate-agent-1r07.onrender.com/speechmatics-jwt", { method: "POST" });
       const { jwt } = await jwtResp.json();
       if (!jwt) throw new Error("No JWT received");
 
