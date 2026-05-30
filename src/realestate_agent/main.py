@@ -364,7 +364,7 @@ FORMATTING RULES (very important):
 - End with "Kind regards," then the placeholder lines on separate lines
 
 You can assist with composing emails to landlords, agents, or other relevant parties based on user input. You also have memory capabilities!""",
-    tools=[WebSearchTool()],
+    tools=[],
     model=MODEL
 )
 
